@@ -4,17 +4,37 @@ import DiceTumble
 # 볼넷, 안타, 2루타, 3루타, 홈런
 
 #아웃카운트
+global OutCount
 OutCount = 0
 
 #이닝
+global inning
 inning = 1
 
+#베이스
+global base
+base = [0,0,0,0]
 #공격 수비
 offense = 0
 defence = 0
 
+#========================================
+
+#공수교대
+def OND():
+    global OutCount
+    if OutCount == 3:
+        print("====공수교대====")
+        OutCount = 0
+
+def Inning():
+    print(f"{inning} 이닝")
+
+#===============================================
+
 #공격 아웃카운트
 def OutCountTotal():
+    global inning
     if OutCount == 3:
         inning += 1
     return OutCount
@@ -22,90 +42,142 @@ def OutCountTotal():
 #수비 아웃카운트
 def OutCountPlus():
     global OutCount
+    global inning
     OutCount += 1
-    if OutCount > 3:
-        OutCount = 1
+    # if OutCount >= 3:
+    #     OutCount = 0
     if OutCount == 3:
         inning += 1
     return OutCount
 
-def asd():
-    Inning()
-    OCT = OutCountTotal()
-    print("아웃 카운트 ", OCT)
+#======================================================
 
-#공수교대
-def OND():
-    # global OutCount
-    if OutCount == 3:
-        print("====공수교대====")
+def OffenseBase(x):
+    global base
+    if x=='H':
+        for i in range(4):
+            base[i] = 0
 
-def Inning():
-    global inning
-    print(f"{inning} 이닝")
+    else :
+        base[x-1] = 1
+        print(base)
+
+
+    #
+    # if x == 1:
+    #     if base == [0, 0, 0, 0]:
+    #         base = [1, 0, 0, 0]
+    #     elif base == [1, 0, 0, 0]:
+    #         base = [1, 1, 0, 0]
+    #     elif base == [1, 1, 0, 0]:
+    #         base = [1, 1, 1, 0]
+    #     elif base == [1, 1, 1, 0]:
+    #         base = [1, 1, 1, 1]
+    #     elif base == [0, 1, 1, 0]:
+    #         base = [1, 0, 1, 1]
+    #     elif base == [0, 1, 0, 0]:
+    #         base = [1, 0, 1, 0]
+    #     elif base == [0, 0, 1, 0]:
+    #         base = [1, 0, 0, 1]
+    #     print(base)
+    # elif x == 2:
+    #     if base == [1, 0, 0, 0]:
+    #         base = [0, 1, 0, 1]
+    #     elif base == [0, 1, 0, 0]:
+    #         base = [0, 1, 0, 1]
+    #     elif base == [0, 0, 1, 0]:
+    #         base = [0, 1, 0, 1]
+    #     elif base == [1, 1, 0, 0]:
+    #         base = [0, 1, 1, 1]
+    #     elif base == [1, 1, 1, 0]:
+    #         base = [0, 1, 1, 2]
+    #     elif base == [0, 1, 1, 0]:
+    #         base = [0, 1, 0, 2]
+    #     elif base == [0, 1, 0, 0]:
+    #         base = [0, 1, 0, 1]
+    #     elif base == [0, 0, 1, 0]:
+    #         base = [0, 1, 0, 1]
+    #     elif base == []
+    #     print(base)
+    # elif x == 3:
+    #     if base == [0, 0, 0, 0]:
+    #         base[0] = 1
+    #         print(base)
+    # elif x == 'H':
+    #     base[3]=[1]
+    #     print(base)
+
+#
+# def BaseMove(x):
+#
+
+#======================================================
+
+#===================================================
+
+def team():
+    print(f"팀  {ㅁ}")
+    print(f"팀  {ㅁ}")
+
+def asd(x):
+    if x == 'O':
+        print("아웃 카운트 : ", OutCountTotal())
+    elif x == 'D':
+        print("아웃 카운트 : ", OutCountPlus())
+    OND()
+
+
+
+
+#====================================================
 
 
 def K():
-    Inning()
     print("삼진")
-    OCP = OutCountPlus()
-    print("아웃 카운트 ", OCP)
-    OND()
+    asd('D')
 
 def GO():
-    Inning()
     print("그라운드 아웃")
-    OCP = OutCountPlus()
-    print("아웃 카운트 ", OCP)
-    OND()
+    asd('D')
 
 
 def FO():
-    Inning()
     print("플라이 아웃")
-    OCP = OutCountPlus()
-    print("아웃 카운트 ", OCP)
-    OND()
+    asd('D')
+
+#---------------------------------
 
 def BB():
-    Inning()
+    OffenseBase(1)
     print("볼넷")
-    OCT = OutCountTotal()
-    print("아웃 카운트 ", OCT)
+    asd('O')
 
 def OneB():
-    Inning()
+    OffenseBase(1)
     print("안타")
-    OCT = OutCountTotal()
-    print("아웃 카운트 ", OCT)
+    asd('O')
 
 def DoubleB():
-    # Inning()
-    # print("2루타")
-    # OCT = OutCountTotal()
-    # print("아웃 카운트 ", OCT)
+    OffenseBase(2)
     print("2루타")
-    asd()
+    asd('O')
 
 def ThreeB():
-    Inning()
+    OffenseBase(3)
     print("3루타")
-    OCT = OutCountTotal()
-    print("아웃 카운트 ", OCT)
+    asd('O')
 
 def HR():
-    Inning()
+    OffenseBase('H')
     print("홈런")
-    OCT = OutCountTotal()
-    print("아웃 카운트 ", OCT)
-
+    asd('O')
 
 #===========================================================================================
 
 def Result():
     D1 = DiceTumble.Dice1()
     D2 = DiceTumble.Dice2()
-    result = DiceTumble.DicePlus()
+    result = D1+D2
     if result == 2:
         print(f"D1 : {D1}  D2 : {D2}")
         print("Value : ", D1 + D2)
@@ -148,7 +220,7 @@ def Result():
         BB()
     elif result == 12:
         print(f"D1 : {D1}  D2 : {D2}")
-        print("Value : ", D1+D2)
+        print("Value : ", D1 + D2)
         HR()
 
 

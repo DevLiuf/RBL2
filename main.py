@@ -16,7 +16,7 @@ print(f"{inning}회 ")
 print("--------------------")
 for i in range(1,30):
     time.sleep(3)
-    print(i, "번")
+    Event.Inning()
     Event.Result()
     print("--------------------")
 
