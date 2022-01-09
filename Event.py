@@ -3,43 +3,49 @@ import DiceTumble
 # 삼진, 그라운드 아웃, 플라이 아웃
 # 볼넷, 안타, 2루타, 3루타, 홈런
 
-#아웃카운트
+# 아웃카운트
 global OutCount
 OutCount = 0
 
-#이닝
+# 이닝
 global inning
 inning = 1
 
-#베이스
+# 베이스
 global base
-base = [0,0,0,0]
-#공격 수비
+base = [0, 0, 0, 0]
+# 공격 수비
 offense = 0
 defence = 0
 
-#========================================
 
-#공수교대
+# ========================================
+
+# 공수교대
 def OND():
     global OutCount
+    global base
     if OutCount == 3:
         print("====공수교대====")
         OutCount = 0
+        base = [0, 0, 0, 0]
+
 
 def Inning():
     print(f"{inning} 이닝")
 
-#===============================================
 
-#공격 아웃카운트
+# ===============================================
+
+# 공격 아웃카운트
 def OutCountTotal():
     global inning
     if OutCount == 3:
         inning += 1
     return OutCount
 
-#수비 아웃카운트
+
+# 수비 아웃카운트
 def OutCountPlus():
     global OutCount
     global inning
@@ -50,18 +56,23 @@ def OutCountPlus():
         inning += 1
     return OutCount
 
-#======================================================
+
+# ======================================================
 
 def OffenseBase(x):
     global base
-    if x=='H':
+    if x == 'H':
         for i in range(4):
             base[i] = 0
 
-    else :
+    else:
+        for i in range(x):
+            base[2] = base[1]
+            base[1] = base[0]
+            base[0] = 0
         base[x-1] = 1
-        print(base)
 
+    print(base)
 
     #
     # if x == 1:
@@ -107,34 +118,37 @@ def OffenseBase(x):
     #     base[3]=[1]
     #     print(base)
 
+
 #
 # def BaseMove(x):
 #
 
-#======================================================
+# ======================================================
 
-#===================================================
+# ===================================================
 
 def team():
     print(f"팀  {ㅁ}")
     print(f"팀  {ㅁ}")
 
+
 def asd(x):
+    global base
     if x == 'O':
         print("아웃 카운트 : ", OutCountTotal())
     elif x == 'D':
         print("아웃 카운트 : ", OutCountPlus())
     OND()
+    print(base)
 
 
-
-
-#====================================================
+# ====================================================
 
 
 def K():
     print("삼진")
     asd('D')
+
 
 def GO():
     print("그라운드 아웃")
@@ -145,39 +159,45 @@ def FO():
     print("플라이 아웃")
     asd('D')
 
-#---------------------------------
+
+# ---------------------------------
 
 def BB():
     OffenseBase(1)
     print("볼넷")
     asd('O')
 
+
 def OneB():
     OffenseBase(1)
     print("안타")
     asd('O')
+
 
 def DoubleB():
     OffenseBase(2)
     print("2루타")
     asd('O')
 
+
 def ThreeB():
     OffenseBase(3)
     print("3루타")
     asd('O')
+
 
 def HR():
     OffenseBase('H')
     print("홈런")
     asd('O')
 
-#===========================================================================================
+
+# ===========================================================================================
 
 def Result():
     D1 = DiceTumble.Dice1()
     D2 = DiceTumble.Dice2()
-    result = D1+D2
+    result = D1 + D2
     if result == 2:
         print(f"D1 : {D1}  D2 : {D2}")
         print("Value : ", D1 + D2)
